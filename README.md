@@ -14,7 +14,9 @@ To run locally, make sure to `npm install` and run mongoDB.
 * [Express Handlebars](https://www.npmjs.com/package/express-handlebars)
 * [cheerio npm](https://www.npmjs.com/package/cheerio)
 * [mongoose](https://www.npmjs.com/package/mongoose) & [mongoDB](https://www.mongodb.com/)
+* [request npm](https://www.npmjs.com/package/request)
 * [body-parser npm](https://www.npmjs.com/package/body-parser)
+* [morgan npm](https://www.npmjs.com/package/morgan)
 
 ### Author
 

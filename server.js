@@ -48,7 +48,7 @@ app.get('/scrape', function(req, res) {
             db.Headline.create(result).then(function(dbHeadline) {
                 res.json('Scrape complete.');
             }).catch(function(err) {
-                return res.json(err);
+                return res.json('No new articles available.');
             });
         });
     });

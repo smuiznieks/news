@@ -1,7 +1,6 @@
 $(function() {
     $('.saveButton').on('click', function() {
         var headlineId = $(this).attr('data-id');
-        console.log(headlineId);
         $.ajax({
             method: 'POST',
             url: '/saved/' + headlineId,
