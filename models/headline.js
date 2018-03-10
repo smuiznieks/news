@@ -5,6 +5,7 @@ var HeadlineSchema = new Schema({
     title: {
         type: String,
         required: true,
+        unique: true
     },
     link: {
         type: String,
@@ -17,6 +18,13 @@ var HeadlineSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    saved: {
+        type: Boolean,
+        default: false
+    },
+    savedAt: {
+        type: Date
     },
     // Link the ObjectId to the Note model
     note: [{

@@ -1,6 +1,35 @@
 <div class="row">
     <div class="col-sm-12">
-        <h4>Scrape Complete!</h4>
-        {{!-- <a class="btn btn-primary btn-lg" href="/" role="button">View Articles</a> --}}
+        {{#each headline}}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{title}}</h5>
+                    <p class="card-text">{{summary}}... <a href="{{link}}" target="blank">View Article</a></p>
+                    <button type="button" class="btn btn-primary modalButton" data-toggle="modal" data-target="#{{id}}">View Notes</button>
+                    <button type="button" class="btn btn-outline-danger btn-primary unsaveButton float-right" data-id="{{id}}">Remove from Saved</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{id}}" tabindex="-1" role="dialog" aria-labelledby="noteModal" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="noteModal">Notes<br /><i>{{title}}</i></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="userNotes{{id}}"></div>
+                                    <input id="noteInput{{id}}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Leave A Note"/>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="newNote btn btn-primary" data-id="{{id}}" type="submit">Save Note</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        {{/each}}
     </div>
 </div>

@@ -10,8 +10,6 @@ var logger = require('morgan');
 var PORT = 7000;
 
 // Require models to access collections
-// var Headline = require('./models/headline.js');
-// var Note = require('./models/note.js');
 var db = require('./models');
 
 // Initialize and configure Express
@@ -31,7 +29,7 @@ mongoose.connect(MONGODB_URI);
 
 // Routes
 app.get('/', function (req, res) {
-    db.Headline.find().sort({'createdAt': -1}).then(function(dbHeadlines) {
+    db.Headline.find().sort({createdAt: -1}).then(function(dbHeadlines) {
         hbsObject = { headline: dbHeadlines };
         res.render('home', hbsObject);
     }).catch(function(err) {
@@ -56,6 +54,33 @@ app.get('/scrape', function(req, res) {
     });
 });
 
+app.get('/saved', function(req, res) {
+    db.Headline.find({saved: true}).sort({savedAt: -1}).then(function(dbHeadlines) {
+        hbsObject = { headline: dbHeadlines };
+        res.render('saved', hbsObject);
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+
+app.post('/saved/:id', function(req, res) {
+    db.Headline.findOneAndUpdate({ _id: req.params.id}, { $set: { saved: true, savedAt: Date.now() }})
+    .then(function(savedHeadline) {
+        res.json(savedHeadline);
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+
+app.post('/unsaved/:id', function(req, res) {
+    db.Headline.findOneAndUpdate({ _id: req.params.id}, { $set: { saved: false }})
+    .then(function(savedHeadline) {
+        res.json(savedHeadline);
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+
 app.get('/api/headline', function(req, res) {
     db.Headline.find({}).then(function(dbHeadlines) {
         res.json(dbHeadlines);
@@ -75,7 +100,7 @@ app.get('/api/headline/:id', function(req, res) {
 
 app.post('/api/headline/:id', function(req, res) {
     db.Note.create(req.body).then(function(dbNote) {
-        return db.Headline.update({ _id: req.params.id}, { $push: {note: dbNote._id }});
+        return db.Headline.update({ _id: req.params.id}, { $push: { note: dbNote._id }});
     }).then(function(dbHeadline) {
         res.json(dbHeadline);
     }).catch(function(err) {
