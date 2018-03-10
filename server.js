@@ -7,7 +7,7 @@ var cheerio = require('cheerio');
 var request = require('request');
 var logger = require('morgan');
 
-var PORT = 7000;
+var PORT = process.env.PORT || 7000;
 
 // Require models to access collections
 var db = require('./models');
