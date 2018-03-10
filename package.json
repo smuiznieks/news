@@ -1,7 +1,7 @@
 {
   "name": "news",
   "version": "1.0.0",
-  "description": "",
+  "description": "Are you a Time Magazine fanatic? Good, you've come to the right place.",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.18.0",
@@ -16,7 +16,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
